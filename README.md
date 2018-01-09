@@ -16,7 +16,7 @@ A preprint of the submitted version is available at biorxiv (link), date of subm
 
 
 ## List of variables for each file
-###sample2profile-Krh1E93.csv:
+### sample2profile-Krh1E93.csv:
 - cDNA.ID: unique ID
 - previous.cDNA.ID: old unique ID
 - Sex: male or female sample                   
@@ -28,7 +28,7 @@ A preprint of the submitted version is available at biorxiv (link), date of subm
 - E93.2: SDM value obtained from absolute quantitative RT PCR of PkE93-2
 - E93.3: SDM value obtained from absolute quantitative RT PCR of PkE93-3
 
-###E93-Pyr-N3D0.csv
+### E93-Pyr-N3D0.csv
 - cDNA.ID: sample unique ID
 - Compound: what type of treatment was undertaken for each sample. The control treatment was methanol ("Control"), and JHM treatment was 20mM of pyriproxyfen ("Mimic")      
 - treatment.stage
@@ -40,7 +40,7 @@ A preprint of the submitted version is available at biorxiv (link), date of subm
 - Gene: Name of gene region
 - SDM: SDM values collected from absolute quantitative RT-PCR	
 
-###E93-Pyr-male.csv
+### E93-Pyr-male.csv
 - Sample.ID: sample unique ID
 - treatment: what type of treatment was undertaken for each sample. The control treatment was methanol ("Control"), and JHM treatment was 20mM of pyriproxyfen ("Mimic")
 - Day: Day after treatment
@@ -49,7 +49,7 @@ A preprint of the submitted version is available at biorxiv (link), date of subm
 - SDM.Gene: SDM values collected from absolute quantitative RT-PCR	
 - SDM.rpL32: SDM values of reference gene collected from absolute quantitative RT-PCR for normalization 
 
-##Scripts
-To access expression profile and effect of JHM treatment graphs click [here](LINKGITHUB)
+## Scripts
+To access expression profile and effect of JHM treatment graphs click [here](https://github.com/zourloubidou/E93mealybug/blob/master/RscriptE93.md)
 
-To access statistical analyses of JHM treatments click [here](LINK GITHUB)
+To access statistical analyses of JHM treatments click [here](https://github.com/zourloubidou/E93mealybug/blob/master/E93_stats.md)
