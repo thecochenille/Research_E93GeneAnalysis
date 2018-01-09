@@ -197,6 +197,38 @@ Fig2B
 ![](RscriptE93_files/figure-docx/unnamed-chunk-7-1.png)<!-- -->
 
 
+
+```r
+#Fig 2B relative expression of E93-1 and PkKr-h1 in 100%
+maleprepupa<-subset(de,de$Sex=="Male" & de$Day.after.oviposition >=27 &de$Day.after.oviposition <=35)
+
+maleprepupa$E931_pct<-(maleprepupa$E93.1/maleprepupa$rpL32)/max(maleprepupa$E93.1/maleprepupa$rpL32)
+maleprepupa$Krh1_pct<-(maleprepupa$Kr.h1/maleprepupa$rpL32)/max(maleprepupa$Kr.h1/maleprepupa$rpL32)
+
+maleprepupagather<-gather(maleprepupa,Gene,SDM,7:12)
+
+maleprepupa_pct<-subset(maleprepupagather, maleprepupagather$Gene=="E931_pct" |maleprepupagather$Gene=="Krh1_pct")
+
+Fig2Bmale<-ggplot(maleprepupa_pct,aes(x=Day.after.oviposition, y=(SDM), fill=Gene)) + 
+  geom_point(aes(shape=Gene)) + 
+  geom_line(aes(linetype=Gene) )+
+  #facet_wrap(~Sex, scales="free",nrow=1) +
+  scale_shape_manual(values=c(3, 17))+
+  scale_linetype_manual(values=c("twodash", "dotted"))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
+#ylab("Comparison relative expression E93-1 and Kr-h1 in males (/rpL32)") +xlab("days after oviposition") +
+  theme_classic(15) + 
+  #ggtitle("Figure 2B: Comparison of PkKr-h1 and PkE93-1\nafter N2 in males and females separately")+
+ theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
+
+
+
+Fig2Bmale
+```
+
+![](RscriptE93_files/figure-docx/unnamed-chunk-8-1.png)<!-- -->
+
+
 #PkKr-h1 and PkE93-2 (Figure S2)
 
 ```r
@@ -218,7 +250,7 @@ ylab("Relative expression (/rpL32)") +xlab("days after oviposition") +
 FigS2
 ```
 
-![](RscriptE93_files/figure-docx/unnamed-chunk-8-1.png)<!-- -->
+![](RscriptE93_files/figure-docx/unnamed-chunk-9-1.png)<!-- -->
 
 #PkKr-h1 and PkE93-3 (Figure S3)
 
@@ -242,7 +274,7 @@ ylab("Relative expression (/rpL32)") +xlab("days after oviposition") +
 FigS3
 ```
 
-![](RscriptE93_files/figure-docx/unnamed-chunk-9-1.png)<!-- -->
+![](RscriptE93_files/figure-docx/unnamed-chunk-10-1.png)<!-- -->
 
 
 
@@ -440,7 +472,7 @@ dtmlogbox <- ggplot(dtm,aes(x=DayL,y=log10(SDM.Gene/SDM.rpL32))) + geom_boxplot(
 dtmlogbox
 ```
 
-![](RscriptE93_files/figure-docx/unnamed-chunk-11-1.png)<!-- -->
+![](RscriptE93_files/figure-docx/unnamed-chunk-12-1.png)<!-- -->
 
 
 
@@ -460,4 +492,4 @@ dtflogbox <- ggplot(dtf,aes(x=DayL,y=log10(SDM/rpL32))) + geom_boxplot(width=0.5
 dtflogbox
 ```
 
-![](RscriptE93_files/figure-docx/unnamed-chunk-12-1.png)<!-- -->
+![](RscriptE93_files/figure-docx/unnamed-chunk-13-1.png)<!-- -->
