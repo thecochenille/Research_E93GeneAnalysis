@@ -39,7 +39,6 @@ library(tidyr)
 We first examined the expression profiles of PkKr-h1 and three identified isoforms of PkE93.
 ```{r}
 #loading file expression profile
-setwd("/Users/isabelle/Dropbox/_Github_reps/E93/")
 de<-read.csv(file="sample2profile-Krh1E93.csv",header = TRUE)
 names(de)
 ```

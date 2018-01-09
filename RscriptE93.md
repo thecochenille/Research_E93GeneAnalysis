@@ -31,7 +31,6 @@ We first examined the expression profiles of PkKr-h1 and three identified isofor
 
 ```r
 #loading file expression profile
-setwd("/Users/isabelle/Dropbox/_Github_reps/E93/")
 de<-read.csv(file="sample2profile-Krh1E93.csv",header = TRUE)
 names(de)
 ```
@@ -43,6 +42,8 @@ names(de)
 ##  [7] "Kr.h1"                 "E93.1"                
 ##  [9] "E93.2"                 "E93.3"
 ```
+
+
 This file includes the the second derivative maximum (SDM) values for Kr-h1, E93-1, E93-2, E93-3 and rpL32 used for expression profile analysis of males and females. The data was collected from RNA extraction performed on an independent sampling from a previous study on juvenile hormone variations in the Japanese mealybug (Vea et al., 2016 PLOS ONE):
 
 
@@ -124,6 +125,7 @@ Fig2a3
 ```
 
 ![](RscriptE93_files/figure-docx/unnamed-chunk-6-1.png)<!-- -->
+
 PkE93-3 has generally very low expression pattern but is expressed during embryogenesis and the differential expression is observed sexually at the end of development too.
 
 
@@ -182,7 +184,6 @@ Fig2B<-ggplot(desub,aes(x=Day.after.oviposition, y=(SDM/rpL32), fill=Gene)) +
   geom_line(aes(linetype=Gene) )+
   facet_wrap(~Sex, scales="free",nrow=1) +
   scale_shape_manual(values=c(3, 17))+
-  
   scale_linetype_manual(values=c("twodash", "dotted"))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
 ylab("Comparison relative expression E93-1 and Kr-h1 in males (/rpL32)") +xlab("days after oviposition") +
@@ -207,9 +208,10 @@ FigS2<-ggplot(desub2,aes(x=Day.after.oviposition, y=(SDM/rpL32), fill=Gene)) +
   geom_point(aes(shape=Gene)) + 
   geom_line(aes(linetype=Gene) )+
   facet_wrap(~Sex, scales="free",nrow=1) +
-  scale_shape_manual(values=c(16, 1))+
+  scale_shape_manual(values=c(3, 17))+
+  scale_linetype_manual(values=c("twodash", "dotted"))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-ylab("Comparison relative expression E93-1 and Kr-h1 in males (/rpL32)") +xlab("days after oviposition") +
+ylab("Relative expression (/rpL32)") +xlab("days after oviposition") +
     ggtitle("Figure S2: Comparison of PkKr-h1 and PkE93-2\nafter N2 in males and females separately")+
   theme_classic(15) + 
   theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
@@ -230,11 +232,12 @@ FigS3<-ggplot(desub3,aes(x=Day.after.oviposition, y=(SDM/rpL32), fill=Gene)) +
   geom_point(aes(shape=Gene)) + 
   geom_line(aes(linetype=Gene) )+
   facet_wrap(~Sex, scales="free",nrow=1) +
-  scale_shape_manual(values=c(16, 1))+
+  scale_shape_manual(values=c(3, 17))+
+  scale_linetype_manual(values=c("twodash", "dotted"))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-ylab("Comparison relative expression E93-1 and Kr-h1 in males (/rpL32)") +xlab("days after oviposition") +
+ylab("Relative expression (/rpL32)") +xlab("days after oviposition") +
   theme_classic(15) +
-     ggtitle("Figure S3: Comparison of PkKr-h1 and PkE93-2\nafter N2 in males and females separately")+
+     ggtitle("Figure S3: Comparison of PkKr-h1 and PkE93-3\nafter N2 in males and females separately")+
   theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
 FigS3
 ```
