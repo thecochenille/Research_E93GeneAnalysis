@@ -162,20 +162,18 @@ is.numeric(dtkrh1$Day)
 dtkrh1$treatment
 names(dtkrh1)
 
-malelmkrh12<-lm(log10((dtkrh1$SDM.Gene/dtkrh1$SDM.rpL32))~dtkrh1$treatment*dtkrh1$Day)
-summary.lm(malelmkrh12) 
-
-
 #fitting linear model on transformed data
 malelmkrh1<-lm(log10((dtkrh1$SDM.Gene/dtkrh1$SDM.rpL32))~dtkrh1$treatment+dtkrh1$Day+dtkrh1$treatment:dtkrh1$Day)
-summary.lm(malelmkrh1) #no effect of interaction
+summary.lm(malelmkrh1) #there is no effect of interaction between treatment type and day after treatment
+
 
 malelmkrh12<-lm(log10((dtkrh1$SDM.Gene/dtkrh1$SDM.rpL32))~dtkrh1$treatment+dtkrh1$Day)
 summary.lm(malelmkrh12) #effect of treatment and day
 plot(malelmkrh1)
 
 ```
-The treatment has a significant effect on PkKr-h1 expression, but there is no 
+
+The treatment has a significant effect on PkKr-h1 expression (p-value < 2e-16 if not considering the interaction between treatment and day after treatment) and the expression changes over time.
 
 
 ## male on E93-1 expression by treatment and by day
@@ -187,11 +185,9 @@ dtE931$Day
 is.numeric(dtE931$Day)
 names(dtE931)
 
-
-
 #transformed lm
 malelmE931<-lm(log10((dtE931$SDM.Gene/dtE931$SDM.rpL32))~dtE931$treatment+dtE931$Day+dtE931$treatment:dtE931$Day)
-summary.lm(malelmE931)
+summary.lm(malelmE931)  # no significant interaction
 
 #remove interaction
 malelmE9312<-lm(log10((dtE931$SDM.Gene/dtE931$SDM.rpL32))~dtE931$treatment+dtE931$Day)
@@ -199,6 +195,7 @@ summary.lm(malelmE9312)
 
 plot(malelmE931)
 ```
+There is a significant effect of the treatment on E93 isoform 1 in males.
 
 ## male on E93-2 expression by treatment and by day
 ```{r}
@@ -219,6 +216,7 @@ summary.lm(malelmE932)
 
 plot(malelmE932)
 ```
+There is a significant effect of treatment on E93 isoform 2 in males.
 
 ## male on E93-3 expression by treatment and by day
 ```{r}
@@ -239,6 +237,8 @@ summary.lm(malelmE933)
 
 plot(malelmE933)
 ```
+There is no significant effect of the treatment on E93 isoform 3 in males.
+
 ## Female on Kr-h1 expression by treatment and by day
 ```{r}
 par(mfrow=c(2,2))
@@ -255,15 +255,9 @@ summary.lm(femalelmkrh1)
 femalelmkrh12<-lm(log10((dtfkrh1$SDM/dtfkrh1$rpL32))~dtfkrh1$Compound+dtfkrh1$Day)
 summary.lm(femalelmkrh12)
 
-femalelmkrh12<-lm(log10((dtfkrh1$SDM/dtfkrh1$rpL32))~dtfkrh1$Day)
-summary.lm(femalelmkrh12)
-
-femalelmkrh12<-lm(log10((dtfkrh1$SDM/dtfkrh1$rpL32))~dtfkrh1$Compound)
-summary.lm(femalelmkrh12)
-
 plot(femalelmkrh1)
 ```
-
+There is a significant effect of treatment on Kr-h1 in females.
 
 ## female on E93-1 expression by treatment and by day
 ```{r}
@@ -279,14 +273,11 @@ summary.lm(femalelmE931) #no effect from interaction
 femalelmE931<-lm(log((dtfE931$SDM/dtfE931$rpL32))~dtfE931$Compound+dtfE931$Day)
 summary.lm(femalelmE931)
 
-femalelmE931<-lm(log((dtfE931$SDM/dtfE931$rpL32))~dtfE931$Day)
-summary.lm(femalelmE931)
-
-femalelmE931<-lm(log((dtfE931$SDM/dtfE931$rpL32))~dtfE931$Compound)
-summary.lm(femalelmE931)
 
 plot(femalelmE931)
 ```
+There is a significant effect of the treatment on E93 isoform 1 when only looking at treatment.
+
 
 ## female on E93-2 expression by treatment and by day
 ```{r}
@@ -302,15 +293,10 @@ summary.lm(femalelmE932)# no effect of interaction
 femalelmE932<-lm(log((dtfE932$SDM/dtfE932$rpL32))~dtfE932$Compound+dtfE932$Day)
 summary.lm(femalelmE932)
 
-femalelmE932<-lm(log((dtfE932$SDM/dtfE932$rpL32))~dtfE932$Compound)
-summary.lm(femalelmE932)
-
-femalelmE932<-lm(log((dtfE932$SDM/dtfE932$rpL32))~dtfE932$Day)
-summary.lm(femalelmE932)
 plot(femalelmE932)
 
 ```
-
+There is no significant effect of treatment in E93 isoform 2 in females
 
 ## female on E93-3 expression by treatment and by day
 ```{r}
@@ -326,11 +312,7 @@ summary.lm(femalelmE933)
 femalelmE933<-lm(log((dtfE933$SDM/dtfE933$rpL32))~dtfE933$Compound+dtfE933$Day)
 summary.lm(femalelmE933)
 
-femalelmE933<-lm(log((dtfE933$SDM/dtfE933$rpL32))~dtfE933$Compound)
-summary.lm(femalelmE933)
-
-femalelmE933<-lm(log((dtfE933$SDM/dtfE933$rpL32))~dtfE933$Day)
-summary.lm(femalelmE933)
 plot(femalelmE933)
 ```
 
+Although E93 isoform 3 expression changes over time, there is no significant effect of the treatment.

@@ -604,7 +604,8 @@ plot(malelmkrh1)
 ```
 
 ![](E93_stats_files/figure-docx/unnamed-chunk-8-1.png)<!-- -->
-The treatment has a significant effect on PkKr-h1 expression, but there is no 
+
+The treatment has a significant effect on PkKr-h1 expression (p-value < 2e-16) and the expression changes over time.
 
 
 ## male on E93-1 expression by treatment and by day
@@ -712,6 +713,7 @@ plot(malelmE931)
 ```
 
 ![](E93_stats_files/figure-docx/unnamed-chunk-9-1.png)<!-- -->
+There is a significant effect of the treatment on E93 isoform 1 in males.
 
 ## male on E93-2 expression by treatment and by day
 
@@ -818,6 +820,7 @@ plot(malelmE932)
 ```
 
 ![](E93_stats_files/figure-docx/unnamed-chunk-10-1.png)<!-- -->
+There is a significant effect of treatment on E93 isoform 2 in males.
 
 ## male on E93-3 expression by treatment and by day
 
@@ -924,6 +927,8 @@ plot(malelmE933)
 ```
 
 ![](E93_stats_files/figure-docx/unnamed-chunk-11-1.png)<!-- -->
+There is no significant effect of the treatment on E93 isoform 3 in males.
+
 ## Female on Kr-h1 expression by treatment and by day
 
 ```r
@@ -1083,7 +1088,7 @@ plot(femalelmkrh1)
 ```
 
 ![](E93_stats_files/figure-docx/unnamed-chunk-12-1.png)<!-- -->
-
+There is a significant effect of treatment on Kr-h1 in females.
 
 ## female on E93-1 expression by treatment and by day
 
@@ -1265,6 +1270,8 @@ plot(femalelmE931)
 ```
 
 ![](E93_stats_files/figure-docx/unnamed-chunk-13-1.png)<!-- -->
+There is a significant effect of the treatment on E93 isoform 1 when only looking at treatment.
+
 
 ## female on E93-2 expression by treatment and by day
 
@@ -1446,7 +1453,7 @@ plot(femalelmE932)
 ```
 
 ![](E93_stats_files/figure-docx/unnamed-chunk-14-1.png)<!-- -->
-
+There is no significant effect of treatment in E93 isoform 2 in females
 
 ## female on E93-3 expression by treatment and by day
 
@@ -1634,3 +1641,4 @@ plot(femalelmE933)
 
 ![](E93_stats_files/figure-docx/unnamed-chunk-15-1.png)<!-- -->
 
+Although E93 isoform 3 expression changes over time, there is no significant effect of the treatment.
