@@ -513,38 +513,9 @@ names(dtkrh1)
 ```
 
 ```r
-malelmkrh12<-lm(log10((dtkrh1$SDM.Gene/dtkrh1$SDM.rpL32))~dtkrh1$treatment*dtkrh1$Day)
-summary.lm(malelmkrh12) 
-```
-
-```
-## 
-## Call:
-## lm(formula = log10((dtkrh1$SDM.Gene/dtkrh1$SDM.rpL32)) ~ dtkrh1$treatment * 
-##     dtkrh1$Day)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.33727 -0.13920  0.00086  0.11337  0.30757 
-## 
-## Coefficients:
-##                                  Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)                      -3.50118    0.23334 -15.005 6.48e-15 ***
-## dtkrh1$treatmentMimic             2.08681    0.32999   6.324 7.69e-07 ***
-## dtkrh1$Day                        0.24662    0.04996   4.936 3.30e-05 ***
-## dtkrh1$treatmentMimic:dtkrh1$Day -0.09507    0.07066  -1.346    0.189    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.1995 on 28 degrees of freedom
-## Multiple R-squared:  0.9542,	Adjusted R-squared:  0.9493 
-## F-statistic: 194.4 on 3 and 28 DF,  p-value: < 2.2e-16
-```
-
-```r
 #fitting linear model on transformed data
 malelmkrh1<-lm(log10((dtkrh1$SDM.Gene/dtkrh1$SDM.rpL32))~dtkrh1$treatment+dtkrh1$Day+dtkrh1$treatment:dtkrh1$Day)
-summary.lm(malelmkrh1) #no effect of interaction
+summary.lm(malelmkrh1) #there is no effect of interaction between treatment type and day after treatment
 ```
 
 ```
@@ -605,7 +576,7 @@ plot(malelmkrh1)
 
 ![](E93_stats_files/figure-docx/unnamed-chunk-8-1.png)<!-- -->
 
-The treatment has a significant effect on PkKr-h1 expression (p-value < 2e-16) and the expression changes over time.
+The treatment has a significant effect on PkKr-h1 expression (p-value < 2e-16 if not considering the interaction between treatment and day after treatment) and the expression changes over time.
 
 
 ## male on E93-1 expression by treatment and by day
@@ -652,7 +623,7 @@ names(dtE931)
 ```r
 #transformed lm
 malelmE931<-lm(log10((dtE931$SDM.Gene/dtE931$SDM.rpL32))~dtE931$treatment+dtE931$Day+dtE931$treatment:dtE931$Day)
-summary.lm(malelmE931)
+summary.lm(malelmE931)  # no significant interaction
 ```
 
 ```
@@ -1032,58 +1003,6 @@ summary.lm(femalelmkrh12)
 ```
 
 ```r
-femalelmkrh12<-lm(log10((dtfkrh1$SDM/dtfkrh1$rpL32))~dtfkrh1$Day)
-summary.lm(femalelmkrh12)
-```
-
-```
-## 
-## Call:
-## lm(formula = log10((dtfkrh1$SDM/dtfkrh1$rpL32)) ~ dtfkrh1$Day)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -0.8379 -0.3584  0.2824  0.3476  0.6977 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -2.12009    0.32734  -6.477 1.42e-07 ***
-## dtfkrh1$Day  0.01021    0.04935   0.207    0.837    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.4621 on 37 degrees of freedom
-## Multiple R-squared:  0.001156,	Adjusted R-squared:  -0.02584 
-## F-statistic: 0.04282 on 1 and 37 DF,  p-value: 0.8372
-```
-
-```r
-femalelmkrh12<-lm(log10((dtfkrh1$SDM/dtfkrh1$rpL32))~dtfkrh1$Compound)
-summary.lm(femalelmkrh12)
-```
-
-```
-## 
-## Call:
-## lm(formula = log10((dtfkrh1$SDM/dtfkrh1$rpL32)) ~ dtfkrh1$Compound)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.44139 -0.09115 -0.03501  0.10671  0.39343 
-## 
-## Coefficients:
-##                       Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)           -2.47577    0.04338  -57.06  < 2e-16 ***
-## dtfkrh1$CompoundMimic  0.82223    0.06058   13.57 6.11e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.1891 on 37 degrees of freedom
-## Multiple R-squared:  0.8327,	Adjusted R-squared:  0.8282 
-## F-statistic: 184.2 on 1 and 37 DF,  p-value: 6.108e-16
-```
-
-```r
 plot(femalelmkrh1)
 ```
 
@@ -1211,58 +1130,6 @@ summary.lm(femalelmE931)
 ## Residual standard error: 0.8151 on 36 degrees of freedom
 ## Multiple R-squared:  0.4884,	Adjusted R-squared:   0.46 
 ## F-statistic: 17.18 on 2 and 36 DF,  p-value: 5.763e-06
-```
-
-```r
-femalelmE931<-lm(log((dtfE931$SDM/dtfE931$rpL32))~dtfE931$Day)
-summary.lm(femalelmE931)
-```
-
-```
-## 
-## Call:
-## lm(formula = log((dtfE931$SDM/dtfE931$rpL32)) ~ dtfE931$Day)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -2.2716 -0.5533  0.3368  0.7803  1.6575 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  -4.6967     0.7938  -5.916 8.15e-07 ***
-## dtfE931$Day  -0.0570     0.1197  -0.476    0.637    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 1.121 on 37 degrees of freedom
-## Multiple R-squared:  0.006094,	Adjusted R-squared:  -0.02077 
-## F-statistic: 0.2269 on 1 and 37 DF,  p-value: 0.6366
-```
-
-```r
-femalelmE931<-lm(log((dtfE931$SDM/dtfE931$rpL32))~dtfE931$Compound)
-summary.lm(femalelmE931)
-```
-
-```
-## 
-## Call:
-## lm(formula = log((dtfE931$SDM/dtfE931$rpL32)) ~ dtfE931$Compound)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.58174 -0.56016  0.05231  0.53605  1.59412 
-## 
-## Coefficients:
-##                       Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)            -5.8426     0.1861 -31.391  < 2e-16 ***
-## dtfE931$CompoundMimic   1.5163     0.2599   5.834 1.05e-06 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.8113 on 37 degrees of freedom
-## Multiple R-squared:  0.4791,	Adjusted R-squared:  0.4651 
-## F-statistic: 34.04 on 1 and 37 DF,  p-value: 1.054e-06
 ```
 
 ```r
@@ -1394,58 +1261,6 @@ summary.lm(femalelmE932)
 ## Residual standard error: 0.8512 on 36 degrees of freedom
 ## Multiple R-squared:  0.1748,	Adjusted R-squared:  0.1289 
 ## F-statistic: 3.812 on 2 and 36 DF,  p-value: 0.03149
-```
-
-```r
-femalelmE932<-lm(log((dtfE932$SDM/dtfE932$rpL32))~dtfE932$Compound)
-summary.lm(femalelmE932)
-```
-
-```
-## 
-## Call:
-## lm(formula = log((dtfE932$SDM/dtfE932$rpL32)) ~ dtfE932$Compound)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.66775 -0.52869  0.01014  0.49784  1.79208 
-## 
-## Coefficients:
-##                       Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)            -8.9214     0.1952 -45.695   <2e-16 ***
-## dtfE932$CompoundMimic   0.7025     0.2726   2.577   0.0141 *  
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.851 on 37 degrees of freedom
-## Multiple R-squared:  0.1521,	Adjusted R-squared:  0.1292 
-## F-statistic: 6.639 on 1 and 37 DF,  p-value: 0.0141
-```
-
-```r
-femalelmE932<-lm(log((dtfE932$SDM/dtfE932$rpL32))~dtfE932$Day)
-summary.lm(femalelmE932)
-```
-
-```
-## 
-## Call:
-## lm(formula = log((dtfE932$SDM/dtfE932$rpL32)) ~ dtfE932$Day)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.8985 -0.6212  0.2222  0.6596  1.4771 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -8.01744    0.64821 -12.369 1.03e-14 ***
-## dtfE932$Day -0.08415    0.09772  -0.861    0.395    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.9151 on 37 degrees of freedom
-## Multiple R-squared:  0.01965,	Adjusted R-squared:  -0.006849 
-## F-statistic: 0.7415 on 1 and 37 DF,  p-value: 0.3947
 ```
 
 ```r
@@ -1581,58 +1396,6 @@ summary.lm(femalelmE933)
 ## Residual standard error: 0.5546 on 36 degrees of freedom
 ## Multiple R-squared:  0.3217,	Adjusted R-squared:  0.284 
 ## F-statistic: 8.536 on 2 and 36 DF,  p-value: 0.0009246
-```
-
-```r
-femalelmE933<-lm(log((dtfE933$SDM/dtfE933$rpL32))~dtfE933$Compound)
-summary.lm(femalelmE933)
-```
-
-```
-## 
-## Call:
-## lm(formula = log((dtfE933$SDM/dtfE933$rpL32)) ~ dtfE933$Compound)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.08411 -0.38046  0.04518  0.43228  1.68165 
-## 
-## Coefficients:
-##                       Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)           -11.6506     0.1476 -78.958   <2e-16 ***
-## dtfE933$CompoundMimic   0.3231     0.2060   1.568    0.125    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.6432 on 37 degrees of freedom
-## Multiple R-squared:  0.0623,	Adjusted R-squared:  0.03696 
-## F-statistic: 2.458 on 1 and 37 DF,  p-value: 0.1254
-```
-
-```r
-femalelmE933<-lm(log((dtfE933$SDM/dtfE933$rpL32))~dtfE933$Day)
-summary.lm(femalelmE933)
-```
-
-```
-## 
-## Call:
-## lm(formula = log((dtfE933$SDM/dtfE933$rpL32)) ~ dtfE933$Day)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.22103 -0.32564  0.05122  0.36489  1.30535 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -10.08403    0.40676 -24.791  < 2e-16 ***
-## dtfE933$Day  -0.21681    0.06132  -3.536  0.00111 ** 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.5742 on 37 degrees of freedom
-## Multiple R-squared:  0.2525,	Adjusted R-squared:  0.2323 
-## F-statistic:  12.5 on 1 and 37 DF,  p-value: 0.001113
 ```
 
 ```r
