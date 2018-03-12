@@ -53,8 +53,8 @@ This file includes the the second derivative maximum (SDM) values for Kr-h1, E93
 ##Kr-h1 expression profile (Figure S1)
 FigS1<-ggplot(de,aes(x=Day.after.oviposition, y=de$Kr.h1/de$rpL32, fill=Sex)) + 
   geom_point(aes(shape=Sex)) + 
-  geom_line(aes(linetype=Sex) )+
-  scale_shape_manual(values=c(16, 1))+ #shape of dots
+  geom_line(aes(linetype=Sex))+
+  scale_shape_manual(values=c(1, 19))+ #shape of dots
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
   ylab("Kr-h1 relative expression (/rpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
@@ -73,7 +73,7 @@ Our independent sampling showed a consistent expression pattern with the samplin
 Fig2a1<-ggplot(de,aes(x=Day.after.oviposition, y=de$E93.1/de$rpL32, fill=Sex)) + 
   geom_point(aes(shape=Sex)) + 
   geom_line(aes(linetype=Sex) )+
-  scale_shape_manual(values=c(16, 1))+
+  scale_shape_manual(values=c(1, 19))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
   ylab("E93-1 relative expression (/rpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
@@ -94,7 +94,7 @@ PkE93-1 shows sexually dimorphic expression pattern starting from the middle of 
 Fig2a2<-ggplot(de,aes(x=Day.after.oviposition, y=de$E93.2/de$rpL32, fill=Sex)) + 
   geom_point(aes(shape=Sex)) + 
   geom_line(aes(linetype=Sex) )+
-  scale_shape_manual(values=c(16, 1))+
+  scale_shape_manual(values=c(1, 19))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
   ylab("E93-2 relative expression (/rpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
@@ -114,7 +114,7 @@ PkE93-2 shows similar patterns to PkE93-1.
 Fig2a3<-ggplot(de,aes(x=Day.after.oviposition, y=de$E93.3/de$rpL32, fill=Sex)) + 
   geom_point(aes(shape=Sex)) + 
   geom_line(aes(linetype=Sex) )+
-  scale_shape_manual(values=c(16, 1))+
+  scale_shape_manual(values=c(1, 19))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
   ylab("E93-3 relative expression (/rpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
@@ -180,7 +180,7 @@ desub<-subset(desub, Day.after.oviposition >= 25) #just after N2
 
 #with both male and female data 
 Fig2B<-ggplot(desub,aes(x=Day.after.oviposition, y=(SDM/rpL32), fill=Gene)) + 
-  geom_point(aes(shape=Gene)) + 
+  geom_point(aes(shape=Gene), size=3) + 
   geom_line(aes(linetype=Gene) )+
   facet_wrap(~Sex, scales="free",nrow=1) +
   scale_shape_manual(values=c(3, 17))+
@@ -210,7 +210,7 @@ maleprepupagather<-gather(maleprepupa,Gene,SDM,7:12)
 maleprepupa_pct<-subset(maleprepupagather, maleprepupagather$Gene=="E931_pct" |maleprepupagather$Gene=="Krh1_pct")
 
 Fig2Bmale<-ggplot(maleprepupa_pct,aes(x=Day.after.oviposition, y=(SDM), fill=Gene)) + 
-  geom_point(aes(shape=Gene)) + 
+  geom_point(aes(shape=Gene), size=4) + 
   geom_line(aes(linetype=Gene) )+
   #facet_wrap(~Sex, scales="free",nrow=1) +
   scale_shape_manual(values=c(3, 17))+
@@ -220,7 +220,6 @@ Fig2Bmale<-ggplot(maleprepupa_pct,aes(x=Day.after.oviposition, y=(SDM), fill=Gen
   theme_classic(15) + 
   #ggtitle("Figure 2B: Comparison of PkKr-h1 and PkE93-1\nafter N2 in males and females separately")+
  theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
-
 
 
 Fig2Bmale
@@ -286,17 +285,16 @@ JHM treatments were performed on both male and female and we assessed their effe
 ```r
 #loading file JHM treatment
 #females
+setwd("/Users/isabelle/Dropbox/_Github_reps/E93mealybug/")
 dtf<-read.csv(file="E93-Pyr-N3D0.csv",header = TRUE)
 names(dtf)
 ```
 
 ```
-##  [1] "cDNA.."          "Compound"        "treatment.stage"
-##  [4] "sex"             "Day"             "DayL"           
-##  [7] "N"               "rpL32"           "Kr.h1"          
-## [10] "E93"             "PkE93.1"         "PkE93.2"        
-## [13] "PkE93.3"         "br.1"            "br.2"           
-## [16] "br.3"
+##  [1] "cDNA."          "Compound"       "Treatment"      "TreatmentStage"
+##  [5] "Sex"            "DAT"            "DayL"           "N"             
+##  [9] "rpL32"          "Kr.h1"          "E93"            "PkE93.1"       
+## [13] "PkE93.2"        "PkE93.3"
 ```
 
 ```r
@@ -304,41 +302,46 @@ head(dtf)
 ```
 
 ```
-##   cDNA.. Compound treatment.stage    sex Day DayL N   rpL32    Kr.h1
-## 1    203  Control            N3D0 female   1    A 1 0.00281 4.22e-05
-## 2    204  Control            N3D0 female   1    A 1 0.00405 6.70e-05
-## 3    205  Control            N3D0 female   1    A 1 0.01160 9.58e-05
-## 4    206  Control            N3D0 female   1    A 1 0.00519 7.69e-05
-## 5    207    Mimic            N3D0 female   1    A 1 0.00281 9.39e-05
-## 6    209    Mimic            N3D0 female   1    A 1 0.00161 3.51e-06
-##        E93  PkE93.1  PkE93.2  PkE93.3     br.1     br.2     br.3
-## 1 9.75e-06 1.77e-06 3.33e-07 6.94e-08 1.29e-06 3.91e-05 6.71e-05
-## 2 1.81e-05 1.85e-06 3.36e-07 9.38e-08 1.01e-06 3.33e-05 2.80e-05
-## 3 3.81e-05 5.16e-06 1.08e-06 1.44e-07 5.26e-06 8.94e-05 1.29e-04
-## 4 2.78e-05 3.62e-06 5.92e-07 1.67e-07 4.03e-06 3.94e-05 9.86e-05
-## 5 4.46e-05 1.59e-05 1.08e-06 2.39e-08 2.19e-06 1.28e-05 8.69e-05
-## 6 4.14e-06 5.95e-07 1.22e-07 1.00e-07 6.68e-08 5.51e-06 4.13e-06
+##   cDNA. Compound Treatment TreatmentStage    Sex DAT DayL N   rpL32
+## 1   203 Methanol   Control           N3D0 female   1    A 1 0.00281
+## 2   204 Methanol   Control           N3D0 female   1    A 1 0.00405
+## 3   205 Methanol   Control           N3D0 female   1    A 1 0.01160
+## 4   206 Methanol   Control           N3D0 female   1    A 1 0.00519
+## 5   281 Methanol   Control           N3D0 female   2    B 1 0.01247
+## 6   282 Methanol   Control           N3D0 female   2    B 1 0.00844
+##       Kr.h1       E93   PkE93.1   PkE93.2   PkE93.3
+## 1 4.220e-05 9.750e-06 1.765e-06 3.333e-07 6.944e-08
+## 2 6.700e-05 1.810e-05 1.847e-06 3.363e-07 9.378e-08
+## 3 9.580e-05 3.810e-05 5.162e-06 1.081e-06 1.435e-07
+## 4 7.690e-05 2.780e-05 3.619e-06 5.923e-07 1.668e-07
+## 5 4.730e-05 2.261e-05 1.528e-06 4.653e-07 1.791e-07
+## 6 3.376e-05 1.156e-05 2.448e-07 1.614e-07 1.413e-07
 ```
 
 ```r
-dtf<-gather(dtf,Gene,SDM,9:16)
-#dtf
+dtf<-gather(dtf,Gene,SDM,10:14)
 head(dtf)
 ```
 
 ```
-##   cDNA.. Compound treatment.stage    sex Day DayL N   rpL32  Gene      SDM
-## 1    203  Control            N3D0 female   1    A 1 0.00281 Kr.h1 4.22e-05
-## 2    204  Control            N3D0 female   1    A 1 0.00405 Kr.h1 6.70e-05
-## 3    205  Control            N3D0 female   1    A 1 0.01160 Kr.h1 9.58e-05
-## 4    206  Control            N3D0 female   1    A 1 0.00519 Kr.h1 7.69e-05
-## 5    207    Mimic            N3D0 female   1    A 1 0.00281 Kr.h1 9.39e-05
-## 6    209    Mimic            N3D0 female   1    A 1 0.00161 Kr.h1 3.51e-06
+##   cDNA. Compound Treatment TreatmentStage    Sex DAT DayL N   rpL32  Gene
+## 1   203 Methanol   Control           N3D0 female   1    A 1 0.00281 Kr.h1
+## 2   204 Methanol   Control           N3D0 female   1    A 1 0.00405 Kr.h1
+## 3   205 Methanol   Control           N3D0 female   1    A 1 0.01160 Kr.h1
+## 4   206 Methanol   Control           N3D0 female   1    A 1 0.00519 Kr.h1
+## 5   281 Methanol   Control           N3D0 female   2    B 1 0.01247 Kr.h1
+## 6   282 Methanol   Control           N3D0 female   2    B 1 0.00844 Kr.h1
+##         SDM
+## 1 4.220e-05
+## 2 6.700e-05
+## 3 9.580e-05
+## 4 7.690e-05
+## 5 4.730e-05
+## 6 3.376e-05
 ```
 
 ```r
 dtf<-subset(dtf, Gene=="Kr.h1" | Gene=="PkE93.1"| Gene=="PkE93.2"| Gene=="PkE93.3")
-dtf<-subset(dtf, Day == 4 |Day == 5 |Day == 6 |Day == 7 |Day == 8 )
 dtf$Gene
 ```
 
@@ -348,37 +351,52 @@ dtf$Gene
 ##  [15] "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"  
 ##  [22] "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"  
 ##  [29] "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"  
-##  [36] "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "PkE93.1" "PkE93.1" "PkE93.1"
-##  [43] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
-##  [50] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
-##  [57] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
+##  [36] "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"  
+##  [43] "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"  
+##  [50] "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"   "Kr.h1"  
+##  [57] "Kr.h1"   "Kr.h1"   "Kr.h1"   "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
 ##  [64] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
 ##  [71] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
-##  [78] "PkE93.1" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
-##  [85] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
-##  [92] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
-##  [99] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
-## [106] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
-## [113] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.3" "PkE93.3"
-## [120] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
-## [127] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
-## [134] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
-## [141] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
-## [148] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
-## [155] "PkE93.3" "PkE93.3"
+##  [78] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
+##  [85] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
+##  [92] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
+##  [99] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
+## [106] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1"
+## [113] "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.1" "PkE93.2"
+## [120] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
+## [127] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
+## [134] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
+## [141] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
+## [148] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
+## [155] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
+## [162] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
+## [169] "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2" "PkE93.2"
+## [176] "PkE93.2" "PkE93.2" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
+## [183] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
+## [190] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
+## [197] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
+## [204] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
+## [211] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
+## [218] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
+## [225] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
+## [232] "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3" "PkE93.3"
 ```
 
 ```r
-dtf$Day
+dtf$DAT
 ```
 
 ```
-##   [1] 4 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6 7 7 7 7 7 7 8 8 8 8 8 8 8 8 8 8 8
-##  [36] 8 8 8 8 4 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6 7 7 7 7 7 7 8 8 8 8 8 8 8
-##  [71] 8 8 8 8 8 8 8 8 4 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6 7 7 7 7 7 7 8 8 8
-## [106] 8 8 8 8 8 8 8 8 8 8 8 8 4 4 4 4 4 4 5 5 5 5 5 5 6 6 6 6 6 6 7 7 7 7 7
-## [141] 7 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8
+##   [1] 1 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 8 8 8 8 1 1 1 1 2 2
+##  [36] 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 8 8 8 8 8 1 1 1 1 2 2 2 3 3 3 4
+##  [71] 4 4 5 5 5 6 6 6 7 7 7 8 8 8 8 8 8 8 1 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5 6
+## [106] 6 6 7 7 7 8 8 8 8 8 8 8 8 1 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7
+## [141] 8 8 8 8 8 8 8 1 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 8 8 8
+## [176] 8 8 1 1 1 1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 8 8 8 8 1 1 1 1
+## [211] 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 8 8 8 8 8
 ```
+
+
 
 ```r
 #males
@@ -437,27 +455,28 @@ dtm$Gene
 ```
 
 ```r
-#subsetting from D3 to D6
-dtm<-subset(dtm, Day == 3| Day == 4| Day == 5| Day == 6)
-dtm$Day
+dtm$DayL
 ```
 
 ```
-##   [1] 3 4 4 4 4 6 5 5 5 5 5 5 5 5 5 5 5 5 4 4 6 6 6 4 4 6 6 3 3 3 3 3 3 4 4
-##  [36] 4 4 6 5 5 5 5 5 5 5 5 5 5 5 5 4 4 6 6 6 4 4 6 6 3 3 3 3 3 3 4 4 4 4 6
-##  [71] 5 5 5 5 5 5 5 5 5 5 5 5 4 4 6 6 6 4 4 6 6 3 3 3 3 3 3 4 4 4 4 6 5 5 5
-## [106] 5 5 5 5 5 5 5 5 5 4 4 6 6 6 4 4 6 6 3 3 3 3 3
+##   [1] A B C D D D D F E E E E E E E E E E E E D D F F F D D F F B B B B B C
+##  [36] C C C C A A A A A A B C D D D D F E E E E E E E E E E E E D D F F F D
+##  [71] D F F B B B B B C C C C C A A A A A A B C D D D D F E E E E E E E E E
+## [106] E E E D D F F F D D F F B B B B B C C C C C A A A A A A B C D D D D F
+## [141] E E E E E E E E E E E E D D F F F D D F F B B B B B C C C C C A A A A
+## [176] A
+## Levels: A B C D E F
 ```
 
 
 
-Graphs of the effect of JHM treatments on Kr-h1 and E93 gene expression and statistical tests were obtained using the transformed data (see statistical analysis file for more details [add a link to the file after github upload]).
+Graphs of the effect of JHM treatments on Kr-h1 and E93 gene expression and statistical tests were obtained using the log10-transformed data (see statistical analysis file for more details [add a link to the file after github upload]).
 
 
 
 ```r
 #Fig 3A: male normalized data by rpL32 transformed by log 10
-dtmlogbox <- ggplot(dtm,aes(x=DayL,y=log10(SDM.Gene/SDM.rpL32))) + geom_boxplot(width=0.5, size=0.2, outlier.size = 0.1, aes(fill=treatment)) + 
+dtmlog10box <- ggplot(dtm,aes(x=DayL,y=log10(SDM.Gene/SDM.rpL32))) + geom_boxplot(width=0.5, size=0.2, outlier.size = 0.1, aes(fill=treatment)) + 
   facet_wrap(~Gene,scales="free",nrow=2) + 
   theme_classic(base_size = 12) +
   ggtitle("Figure 3A: Effect of JHM treatment on Kr-h1\nand E93 expression in males transformed by log 10")+
@@ -469,16 +488,16 @@ dtmlogbox <- ggplot(dtm,aes(x=DayL,y=log10(SDM.Gene/SDM.rpL32))) + geom_boxplot(
   theme(strip.background=element_rect(fill="black"))+ 
   theme(strip.text=element_text(color="white", face="bold"))
 
-dtmlogbox
+dtmlog10box
 ```
 
-![](RscriptE93_files/figure-docx/unnamed-chunk-12-1.png)<!-- -->
+![](RscriptE93_files/figure-docx/unnamed-chunk-13-1.png)<!-- -->
 
 
 
 ```r
 #Fig 3B: females absolute values normalized by rpL32 and transformed by log10
-dtflogbox <- ggplot(dtf,aes(x=DayL,y=log10(SDM/rpL32))) + geom_boxplot(width=0.5, size=0.2, outlier.size = 0.1, aes(fill=Compound)) + 
+dtflogbox <- ggplot(dtf,aes(x=DayL,y=log10(SDM/rpL32))) + geom_boxplot(width=0.5, size=0.2, outlier.size = 0.1, aes(fill=Treatment)) + 
   facet_wrap(~Gene, scales="free",nrow=2) + 
   theme_classic(base_size = 12) +
   scale_fill_manual(name="", # Legend label, use darker colors
@@ -492,4 +511,4 @@ dtflogbox <- ggplot(dtf,aes(x=DayL,y=log10(SDM/rpL32))) + geom_boxplot(width=0.5
 dtflogbox
 ```
 
-![](RscriptE93_files/figure-docx/unnamed-chunk-13-1.png)<!-- -->
+![](RscriptE93_files/figure-docx/unnamed-chunk-14-1.png)<!-- -->

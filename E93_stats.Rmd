@@ -1,6 +1,7 @@
 ---
-title: 'Supplementary text: Materials and Methods - Statistical analyses for JHM treatments (A case of insect female neoteny:
-  E93 expression and links to the juvenile hormone in mealybugs)'
+title: 'Supplementary text: Materials and Methods - Statistical analyses for JHM treatments
+  in mealybugs)'
+  (A case of insect female neoteny: E93 expression and links to the juvenile hormone
 author: "Isabelle Vea"
 date: "September 28, 2017"
 output:
@@ -12,16 +13,12 @@ output:
     keep_md: yes
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 #Summary
 You will find here all the analyses related to the statistics of hormonal treatments carried out in Vea et al. (submitted to Journal of Insect Biochemistry and Molecular Biology). 
 
 
 ```{r}
-setwd("/Users/isabelle/Dropbox/_Github_reps/E93/")
 library(ggplot2)
 library(plyr)
 library(tidyr)
@@ -36,7 +33,7 @@ library(tidyr)
 dtf<-read.csv(file="E93-Pyr-N3D0.csv",header = TRUE)
 names(dtf)
 head(dtf)
-dtf<-gather(dtf,Gene,SDM,9:16)
+dtf<-gather(dtf,Gene,SDM,10:14)
 #dtf
 head(dtf)
 
@@ -50,10 +47,27 @@ head(dtm)
 ```{r}
 #female dataset subsetting to keep Kr-h1 and E93 1 and 2 subset from D4 to D8
 dtf<-subset(dtf, Gene=="Kr.h1" | Gene=="PkE93.1"| Gene=="PkE93.2"| Gene=="PkE93.3")
-dtf<-subset(dtf, Day == 4 |Day == 5 |Day == 6 |Day == 7 |Day == 8 )
 dtf$Gene
-dtf$Day
+dtf$DAT
 ```
+
+###Comparing the absolute amount of reference gene between treatments
+```{r}
+dtfbox_RPL32 <- ggplot(dtf,aes(x=Treatment,y=rpL32)) + geom_boxplot(width=0.5, size=0.2, outlier.size = 0.1)
+
+dtfbox_RPL32
+hist(dtf$rpL32)
+hist(log10(dtf$rpL32))
+
+#test normality
+shapiro.test(dtf$rpL32) ## not normal distribution
+#non parametric test, Mann Whitney U test
+wilcox.test(data=dtf, dtf$rpL32~dtf$Treatment, paired=FALSE) ## difference not significant
+
+```
+
+
+
 
 
 ###Female dataset for PkKr-h1
@@ -64,7 +78,7 @@ dtfkrh1$Gene
 hist(dtfkrh1$SDM/dtfkrh1$rpL32, main="Distribution of all data  PkKr-h1/rpL32, regardless of treatment type")#not normal
 ```
 
-The distribution of qPCR data collected for relative expression of PkKr-h1 is nor normal. We decided to transform the data to log10.
+The distribution of qPCR data collected for relative expression of PkKr-h1 is not normal. We decided to transform the data to log10.
 
 ```{r}
   #log transformed
@@ -75,13 +89,13 @@ We also checked data distribution by treatment
 
 ```{r}
 #by treatment
-dtfkrh1CT<-subset(dtfkrh1,Compound=="Control")
-dtfkrh1CT$Compound
-dtfkrh1JHM<-subset(dtfkrh1,Compound=="Mimic")
-dtfkrh1JHM$Compound
+dtfkrh1CT<-subset(dtfkrh1,Treatment=="Control")
+dtfkrh1CT$Treatment
+dtfkrh1JHM<-subset(dtfkrh1,Treatment=="Mimic")
+dtfkrh1JHM$Treatment
 
-hist(dtfkrh1CT$SDM/dtfkrh1CT$rpL32, main="Distribution of   PkKr-h1/rpL32 data, including only control treatments")
-hist(dtfkrh1JHM$SDM/dtfkrh1JHM$rpL32, main="Distribution of   PkKr-h1/rpL32 data, including only mimic treatments")
+hist(dtfkrh1CT$SDM/dtfkrh1CT$rpL32, main="Distribution of PkKr-h1/rpL32 data, including only control treatments")
+hist(dtfkrh1JHM$SDM/dtfkrh1JHM$rpL32, main="Distribution of PkKr-h1/rpL32 data, including only mimic treatments")
 
   #log transformed
 hist(log10(dtfkrh1CT$SDM/dtfkrh1CT$rpL32)) #ok
@@ -93,17 +107,22 @@ hist(log10(dtfkrh1JHM$SDM/dtfkrh1JHM$rpL32)) #skewed normal
 
 ```{r}
 #all female dataset E93 1
+
 dtfE931<-subset(dtf, Gene=="PkE93.1")
 dtfE931$Gene
 hist(dtfE931$SDM/dtfE931$rpL32) #distribution not normal
+```
+```{r}
   #log transformed
-hist(log10(dtfE931$SDM/dtfE931$rpL32) )
+hist(log10(dtfE931$SDM/dtfE931$rpL32))
+```
 
+```{r}
 #by treatment
-dtfE931CT<-subset(dtfE931,Compound=="Control")
-dtfE931CT$Compound
-dtfE931JHM<-subset(dtfE931,Compound=="Mimic")
-dtfE931JHM$Compound
+dtfE931CT<-subset(dtfE931,Treatment=="Control")
+dtfE931CT$Treatment
+dtfE931JHM<-subset(dtfE931,Treatment=="Mimic")
+dtfE931JHM$Treatment
 
 hist(dtfE931CT$SDM/dtfE931CT$rpL32) #not normal
 hist(dtfE931JHM$SDM/dtfE931JHM$rpL32)
@@ -112,15 +131,48 @@ hist(dtfE931JHM$SDM/dtfE931JHM$rpL32)
 hist(log10(dtfE931CT$SDM/dtfE931CT$rpL32)) #two peaks
 hist(log10(dtfE931JHM$SDM/dtfE931JHM$rpL32)) #weird!
 
+```
 
+
+```{r}
+#all female dataset E93 1
+dtfE932<-subset(dtf, Gene=="PkE93.2")
+dtfE932$Gene
+hist(dtfE932$SDM/dtfE932$rpL32) #distribution not normal
+  #log transformed
+hist(log10(dtfE932$SDM/dtfE932$rpL32) )
+```
+
+```{r}
+#by treatment
+dtfE932CT<-subset(dtfE931,Treatment=="Control")
+dtfE932CT$Treatment
+dtfE932JHM<-subset(dtfE931,Treatment=="Mimic")
+dtfE931JHM$Treatment
+
+hist(dtfE931CT$SDM/dtfE931CT$rpL32) #not normal
+hist(dtfE931JHM$SDM/dtfE931JHM$rpL32)
+  
+  #log transformed
+hist(log10(dtfE931CT$SDM/dtfE931CT$rpL32)) #two peaks
+hist(log10(dtfE931JHM$SDM/dtfE931JHM$rpL32)) #weird!
+
+```
+
+
+
+
+
+
+
+
+
+```{r}
 #male dataset subset Krh1 and E93 1
 head(dtm)
 #subsetting Kr-h1 and E93 1
 dtm<-subset(dtm, Gene=="Kr-h1" | Gene=="PkE93-1"| Gene=="PkE93-2"| Gene=="PkE93-3")
 dtm$Gene
-
-#subsetting from D3 to D6
-dtm<-subset(dtm, Day == 3| Day == 4| Day == 5| Day == 6)
 dtm$Day
 
 #all male krh1
@@ -158,22 +210,19 @@ par(mfrow=c(2,2))
 #dtm
 dtkrh1<-subset(dtm,Gene=="Kr-h1") #subsetting the dataset to have only Kr-h1
 dtkrh1$Gene
+names(dtkrh1)
 is.numeric(dtkrh1$Day)
 dtkrh1$treatment
 names(dtkrh1)
 
 #fitting linear model on transformed data
 malelmkrh1<-lm(log10((dtkrh1$SDM.Gene/dtkrh1$SDM.rpL32))~dtkrh1$treatment+dtkrh1$Day+dtkrh1$treatment:dtkrh1$Day)
-summary.lm(malelmkrh1) #there is no effect of interaction between treatment type and day after treatment
-
-
-malelmkrh12<-lm(log10((dtkrh1$SDM.Gene/dtkrh1$SDM.rpL32))~dtkrh1$treatment+dtkrh1$Day)
-summary.lm(malelmkrh12) #effect of treatment and day
+summary.lm(malelmkrh1) # there is an interaction between time and treatment
 plot(malelmkrh1)
-
 ```
 
-The treatment has a significant effect on PkKr-h1 expression (p-value < 2e-16 if not considering the interaction between treatment and day after treatment) and the expression changes over time.
+The treatment has a significant effect on PkKr-h1 expression (p-value 6.67e-5), gene expression doesn't seem to change significantly over time after treatment (0.4962), but an interaction between type of treatment and day after treatment was observed (0.0224). 
+I therefore kept the interaction of variables in the model.
 
 
 ## male on E93-1 expression by treatment and by day
@@ -188,14 +237,17 @@ names(dtE931)
 #transformed lm
 malelmE931<-lm(log10((dtE931$SDM.Gene/dtE931$SDM.rpL32))~dtE931$treatment+dtE931$Day+dtE931$treatment:dtE931$Day)
 summary.lm(malelmE931)  # no significant interaction
+```
+If we consider the linear model including an interaction between variables, the JHM treatment does not have a significant effect, but there is a change over time in gene expression. Because the interaction between these two variables are not significant, I removed it from the model considering only the two variables separately.
 
+```{r}
 #remove interaction
 malelmE9312<-lm(log10((dtE931$SDM.Gene/dtE931$SDM.rpL32))~dtE931$treatment+dtE931$Day)
 summary.lm(malelmE9312)
-
 plot(malelmE931)
 ```
-There is a significant effect of the treatment on E93 isoform 1 in males.
+After removing the interaction, the JHM treatment has asignificant effect on gene expression and the expression changes over time in CT and JHM.
+
 
 ## male on E93-2 expression by treatment and by day
 ```{r}
@@ -209,14 +261,18 @@ names(dtE932)
 #transformed lm
 malelmE932<-lm(log10((dtE932$SDM.Gene/dtE932$SDM.rpL32))~dtE932$treatment+dtE932$Day+dtE932$treatment:dtE932$Day)
 summary.lm(malelmE932)
+```
 
+If we consider the linear model including an interaction between variables, the JHM treatment does not have a significant effect, but there is a change over time in gene expression. Because the interaction between these two variables are not significant, I removed it from the model considering only the two variables separately.
+
+
+```{r}
 #remove interaction
 malelmE932<-lm(log10((dtE932$SDM.Gene/dtE932$SDM.rpL32))~dtE932$treatment+dtE932$Day)
 summary.lm(malelmE932)
-
 plot(malelmE932)
 ```
-There is a significant effect of treatment on E93 isoform 2 in males.
+After removing the interaction, the JHM treatment has a significant effect on gene expression and the expression changes over time in CT and JHM.
 
 ## male on E93-3 expression by treatment and by day
 ```{r}
@@ -231,33 +287,35 @@ names(dtE933)
 malelmE933<-lm(log10((dtE933$SDM.Gene/dtE933$SDM.rpL32))~dtE933$treatment+dtE933$Day+dtE933$treatment:dtE933$Day)
 summary.lm(malelmE933)
 
+```
+If we consider the linear model including an interaction between variables, the JHM treatment does not have a significant effect, but there is a change over time in gene expression. Because the interaction between these two variables are not significant, I removed it from the model considering only the two variables separately.
+
+```{r}
+
 #remove interaction
 malelmE933<-lm(log10((dtE933$SDM.Gene/dtE933$SDM.rpL32))~dtE933$treatment+dtE933$Day)
 summary.lm(malelmE933)
 
 plot(malelmE933)
 ```
-There is no significant effect of the treatment on E93 isoform 3 in males.
+After removing the interaction between variables, there is a significant effect of the treatment on E93 isoform 3 in males.
 
 ## Female on Kr-h1 expression by treatment and by day
 ```{r}
 par(mfrow=c(2,2))
 dtfkrh1<-subset(dtf,Gene=="Kr.h1")
 dtfkrh1$Gene
-dtfkrh1$Day
-is.numeric(dtfkrh1$Day)
+dtfkrh1$DAT
+is.numeric(dtfkrh1$DAT)
 names(dtfkrh1)
 
-femalelmkrh1<-lm(log10((dtfkrh1$SDM/dtfkrh1$rpL32))~dtfkrh1$Compound+dtfkrh1$Day+dtfkrh1$Compound:dtfkrh1$Day)
+femalelmkrh1<-lm(log10((dtfkrh1$SDM/dtfkrh1$rpL32))~dtfkrh1$Treatment+dtfkrh1$DAT+dtfkrh1$Treatment:dtfkrh1$DAT)
 summary.lm(femalelmkrh1)
 
-#remove interaction
-femalelmkrh12<-lm(log10((dtfkrh1$SDM/dtfkrh1$rpL32))~dtfkrh1$Compound+dtfkrh1$Day)
-summary.lm(femalelmkrh12)
-
-plot(femalelmkrh1)
 ```
-There is a significant effect of treatment on Kr-h1 in females.
+
+When including the interaction between the two variables, there is a significant change in expression over time between the control and JHM groups. We therefore kept this model for PkKr-h1 in females.
+
 
 ## female on E93-1 expression by treatment and by day
 ```{r}
@@ -265,18 +323,24 @@ par(mfrow=c(2,2))
 dtf$Gene
 dtfE931<-subset(dtf,Gene=="PkE93.1")
 dtfE931$Gene
-is.numeric(dtfE931$Day)
+is.numeric(dtfE931$DAT)
 names(dtfE931)
-femalelmE931<-lm(log((dtfE931$SDM/dtfE931$rpL32))~dtfE931$Compound+dtfE931$Day+dtfE931$Compound:dtfE931$Day)
-summary.lm(femalelmE931) #no effect from interaction
 
-femalelmE931<-lm(log((dtfE931$SDM/dtfE931$rpL32))~dtfE931$Compound+dtfE931$Day)
+#with interaction
+femalelmE931<-lm(log10((dtfE931$SDM/dtfE931$rpL32))~dtfE931$Treatment+dtfE931$DAT+dtfE931$Treatment:dtfE931$DAT)
+summary.lm(femalelmE931) #no interaction
+
+```
+If we consider the linear model including an interaction between variables, the JHM treatment does not have a significant effect, but there is a change over time in gene expression. Because the interaction between these two variables are not significant, I removed it from the model considering only the two variables separately.
+
+
+```{r}
+#remove interaction
+femalelmE931<-lm(log10((dtfE931$SDM/dtfE931$rpL32))~dtfE931$Treatment+dtfE931$DAT)
 summary.lm(femalelmE931)
-
-
 plot(femalelmE931)
 ```
-There is a significant effect of the treatment on E93 isoform 1 when only looking at treatment.
+There is a significant overall effect of the treatment on E93 isoform 1.
 
 
 ## female on E93-2 expression by treatment and by day
@@ -285,18 +349,22 @@ par(mfrow=c(2,2))
 dtf$Gene
 dtfE932<-subset(dtf,Gene=="PkE93.2")
 dtfE932$Gene
-is.numeric(dtfE932$Day)
+is.numeric(dtfE932$DAT)
 names(dtfE932)
-femalelmE932<-lm(log((dtfE932$SDM/dtfE932$rpL32))~dtfE932$Compound+dtfE932$Day+dtfE932$Compound:dtfE932$Day)
+
+
+femalelmE932<-lm(log10((dtfE932$SDM/dtfE932$rpL32))~dtfE932$Treatment+dtfE932$DAT+dtfE932$Treatment:dtfE932$DAT)
 summary.lm(femalelmE932)# no effect of interaction
 
-femalelmE932<-lm(log((dtfE932$SDM/dtfE932$rpL32))~dtfE932$Compound+dtfE932$Day)
+```
+No significant effect when including the interaction between both variable, we therefore removed the interaction in the model.
+```{r}
+femalelmE932<-lm(log10((dtfE932$SDM/dtfE932$rpL32))~dtfE932$Treatment+dtfE932$DAT)
 summary.lm(femalelmE932)
-
 plot(femalelmE932)
 
 ```
-There is no significant effect of treatment in E93 isoform 2 in females
+The overall effect of treatment is significant, probably due to day 2, day 4 and Day 8
 
 ## female on E93-3 expression by treatment and by day
 ```{r}
@@ -304,14 +372,15 @@ par(mfrow=c(2,2))
 dtf$Gene
 dtfE933<-subset(dtf,Gene=="PkE93.3")
 dtfE933$Gene
-is.numeric(dtfE933$Day)
+is.numeric(dtfE933$DAT)
 names(dtfE933)
-femalelmE933<-lm(log((dtfE933$SDM/dtfE933$rpL32))~dtfE933$Compound+dtfE933$Day+dtfE933$Compound:dtfE933$Day)
+femalelmE933<-lm(log((dtfE933$SDM/dtfE933$rpL32))~dtfE933$Treatment+dtfE933$DAT+dtfE933$Treatment:dtfE933$DAT)
 summary.lm(femalelmE933)
-
-femalelmE933<-lm(log((dtfE933$SDM/dtfE933$rpL32))~dtfE933$Compound+dtfE933$Day)
+```
+If we consider the linear model including an interaction between variables, the JHM treatment does not have a significant effect, but there is a change over time in gene expression. Because the interaction between these two variables are not significant, I removed it from the model considering only the two variables separately.
+```{r}
+femalelmE933<-lm(log((dtfE933$SDM/dtfE933$rpL32))~dtfE933$Treatment+dtfE933$DAT)
 summary.lm(femalelmE933)
-
 plot(femalelmE933)
 ```
 
