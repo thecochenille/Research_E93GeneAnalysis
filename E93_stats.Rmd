@@ -1,7 +1,6 @@
 ---
-title: 'Supplementary text: Materials and Methods - Statistical analyses for JHM treatments
-  in mealybugs)'
-  (A case of insect female neoteny: E93 expression and links to the juvenile hormone
+title: 'Supplementary text: Materials and Methods - Figures expression profiles (A case of insect female neoteny:
+  E93 expression and links to the juvenile hormone in mealybugs)'
 author: "Isabelle Vea"
 date: "September 28, 2017"
 output:
