@@ -1,6 +1,16 @@
-# Supplementary text: Materials and Methods - Figures expression profiles (A case of insect female neoteny: E93 expression and links to the juvenile hormone in mealybugs)
-Isabelle Vea  
-September 28, 2017  
+---
+title: 'Supplementary text: Materials and Methods - Figures expression profiles (A case of insect female neoteny:
+  E93 expression and links to the juvenile hormone in mealybugs)'
+author: "Isabelle Vea"
+date: "September 28, 2017"
+output:
+  word_document:
+    fig_caption: yes
+    keep_md: yes
+  pdf_document: default
+  html_document:
+    keep_md: yes
+---
 
 
 #Summary

@@ -1,6 +1,16 @@
-# Supplementary text: Materials and Methods - Figures expression profiles (A case of insect female neoteny: E93 expression and links to the juvenile hormone in mealybugs)
-Isabelle Vea  
-September 28, 2017  
+---
+title: 'Supplementary text: Materials and Methods - Figures expression profiles (A case of insect female neoteny:
+  E93 expression and links to the juvenile hormone in mealybugs)'
+author: "Isabelle Vea"
+date: "November 30, 2018"
+output:
+  word_document:
+    fig_caption: yes
+    keep_md: yes
+  pdf_document: default
+  html_document:
+    keep_md: yes
+---
 
 #Supplementary information 2.3. RNA extraction and quantitative RT-PCR
 This document provides the R command lines used to produce the figures for E93 study in the Japanese mealybug. (REF)
@@ -44,81 +54,82 @@ names(de)
 ```
 
 
-This file includes the the second derivative maximum (SDM) values for Kr-h1, E93-1, E93-2, E93-3 and rpL32 used for expression profile analysis of males and females. The data was collected from RNA extraction performed on an independent sampling from a previous study on juvenile hormone variations in the Japanese mealybug (Vea et al., 2016 PLOS ONE):
+This file includes the the second derivative maximum (SDM) values for PkKr-h1A, PkE93A, PkE93B, PkE93C and PkrpL32 used for expression profile analysis of males and females. The data was collected from RNA extraction performed on a new independent sampling from a previous study on juvenile hormone variations in the Japanese mealybug (Vea et al., 2016 PLOS ONE):
 
 
-##Kr-h1 expression between males and females (Figure S1)
+##PkKr-h1A expression between males and females (Figure S1)
 
 ```r
-##Kr-h1 expression profile (Figure S1)
+##PkKr-h1A expression profile (Figure S1)
 FigS1<-ggplot(de,aes(x=Day.after.oviposition, y=de$Kr.h1/de$rpL32, fill=Sex)) + 
   geom_point(aes(shape=Sex)) + 
   geom_line(aes(linetype=Sex))+
   scale_shape_manual(values=c(1, 19))+ #shape of dots
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-  ylab("Kr-h1 relative expression (/rpL32)") +xlab("days after oviposition") +
+  ylab("PkKr-h1A relative expression (/PkrpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
-  ggtitle("Figure S1: Expression profile of PkKr-h1 during\nmale and female Japanese mealybug development after oviposition")+
+  ggtitle("Figure S1: Expression profile of PkKr-h1A during\nmale and female Japanese mealybug development after oviposition")+
   theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
 FigS1
 ```
 
 ![](RscriptE93_files/figure-docx/unnamed-chunk-3-1.png)<!-- -->
-Our independent sampling showed a consistent expression pattern with the sampling carried out for Vea et al., 2016. PkKr-h1 expression shows a diverging expression when N2 start to differente between male and females. Male expression continues and drops later after the prepupal molt, while female N2 have their PkKr-h1 expression progressively decreasing, to remain unusually low until the adult molt.
 
-##E93 isoform 1 (Figure 2A-top)
+Our independent sampling showed a consistent expression pattern with the sampling carried out for Vea et al., 2016. PkKr-h1A expression shows a diverging expression when N2 start to differente between male and females. Male expression continues and drops later after the prepupal molt, while female N2 have their PkKr-h1 expression progressively decreasing, to remain unusually low until the adult molt.
+
+##PkE93 isoform A (Figure 2A-top)
 
 ```r
-##E93-1 expression profile (Figure 2A)
+##PkE93A expression profile (Figure 2A)
 Fig2a1<-ggplot(de,aes(x=Day.after.oviposition, y=de$E93.1/de$rpL32, fill=Sex)) + 
   geom_point(aes(shape=Sex)) + 
   geom_line(aes(linetype=Sex) )+
   scale_shape_manual(values=c(1, 19))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-  ylab("E93-1 relative expression (/rpL32)") +xlab("days after oviposition") +
+  ylab("PkE93A relative expression (/PkrpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
-  ggtitle("Figure 2A: Expression profile of PkE93-1 during\nmale and female Japanese mealybug development after oviposition")+
+  ggtitle("Figure 2A: Expression profile of PkE93A during\nmale and female Japanese mealybug development after oviposition")+
   theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
 
 Fig2a1
 ```
 
 ![](RscriptE93_files/figure-docx/unnamed-chunk-4-1.png)<!-- -->
-PkE93-1 shows sexually dimorphic expression pattern starting from the middle of N2. PkE93-1 expression rapidly increases and peaks during the pupal stage, while in females, the levels are far lower, but with two small increases at the end of N2 and N3.
+PkE93A shows sexually dimorphic expression pattern starting from the middle of N2. PkE93A expression rapidly increases and peaks during the pupal stage, while in females, the levels are far lower, but with two small increases at the end of N2 and N3.
 
 
-##E92 isoform 2 (Figure 2A-middle)
+##PkE92 isoform B (Figure 2A-middle)
 
 ```r
-##E93-2 expression profile (Figure S2)
+##PkE93B expression profile (Figure S2)
 Fig2a2<-ggplot(de,aes(x=Day.after.oviposition, y=de$E93.2/de$rpL32, fill=Sex)) + 
   geom_point(aes(shape=Sex)) + 
   geom_line(aes(linetype=Sex) )+
   scale_shape_manual(values=c(1, 19))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-  ylab("E93-2 relative expression (/rpL32)") +xlab("days after oviposition") +
+  ylab("PkE93B relative expression (/PkrpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
-  ggtitle("Figure 2A: Expression profile of PkE93-2 during\nmale and female Japanese mealybug development after oviposition")+
+  ggtitle("Figure 2A middle: Expression profile of PkE93B during\nmale and female Japanese mealybug development after oviposition")+
   theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
 
 Fig2a2
 ```
 
 ![](RscriptE93_files/figure-docx/unnamed-chunk-5-1.png)<!-- -->
-PkE93-2 shows similar patterns to PkE93-1.
+PkE93B shows similar patterns to PkE93A.
 
-##E92 isoform 3 (Fig 2A-bottom)
+##PkE92 isoform C (Fig 2A-bottom)
 
 ```r
-#E93 -3 expression profile (Figure 2A)
+#PkE93C expression profile (Figure 2A)
 Fig2a3<-ggplot(de,aes(x=Day.after.oviposition, y=de$E93.3/de$rpL32, fill=Sex)) + 
   geom_point(aes(shape=Sex)) + 
   geom_line(aes(linetype=Sex) )+
   scale_shape_manual(values=c(1, 19))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-  ylab("E93-3 relative expression (/rpL32)") +xlab("days after oviposition") +
+  ylab("PkE93C relative expression (/PkrpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
-  ggtitle("Figure 2A: Expression profile of PkE93-3 during\nmale and female Japanese mealybug development after oviposition")+
+  ggtitle("Figure 2A: Expression profile of PkE93C during\nmale and female Japanese mealybug development after oviposition")+
   theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
 
 Fig2a3
@@ -126,10 +137,10 @@ Fig2a3
 
 ![](RscriptE93_files/figure-docx/unnamed-chunk-6-1.png)<!-- -->
 
-PkE93-3 has generally very low expression pattern but is expressed during embryogenesis and the differential expression is observed sexually at the end of development too.
+PkE93C has generally very low expression pattern but is expressed during embryogenesis and the differential expression is observed sexually at the end of development too.
 
 
-#Comparison Kr-h1 and E93-1 (Figure 2B)
+#Comparison PkKr-h1A and PkE93A (Figure 2B)
 
 ```r
 head(de)
@@ -186,9 +197,9 @@ Fig2B<-ggplot(desub,aes(x=Day.after.oviposition, y=(SDM/rpL32), fill=Gene)) +
   scale_shape_manual(values=c(3, 17))+
   scale_linetype_manual(values=c("twodash", "dotted"))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-ylab("Comparison relative expression E93-1 and Kr-h1 in males (/rpL32)") +xlab("days after oviposition") +
+ylab("Comparison relative expression PkE93A and PkKr-h1A in males (/rpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
-  ggtitle("Figure 2B: Comparison of PkKr-h1 and PkE93-1\nafter N2 in males and females separately")+
+  ggtitle("Figure 2B: Comparison of PkKr-h1A and PkE93A\after N2 in males and females separately")+
  theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
 
 Fig2B
@@ -199,7 +210,7 @@ Fig2B
 
 
 ```r
-#Fig 2B relative expression of E93-1 and PkKr-h1 in 100%
+#Fig 2B relative expression of PkE93A and PkKr-h1A in 100%
 maleprepupa<-subset(de,de$Sex=="Male" & de$Day.after.oviposition >=27 &de$Day.after.oviposition <=35)
 
 maleprepupa$E931_pct<-(maleprepupa$E93.1/maleprepupa$rpL32)/max(maleprepupa$E93.1/maleprepupa$rpL32)
@@ -216,9 +227,9 @@ Fig2Bmale<-ggplot(maleprepupa_pct,aes(x=Day.after.oviposition, y=(SDM), fill=Gen
   scale_shape_manual(values=c(3, 17))+
   scale_linetype_manual(values=c("twodash", "dotted"))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-#ylab("Comparison relative expression E93-1 and Kr-h1 in males (/rpL32)") +xlab("days after oviposition") +
+#ylab("Comparison relative expression PkE93A and PkKr-h1A in males (/rpL32)") +xlab("days after oviposition") +
   theme_classic(15) + 
-  #ggtitle("Figure 2B: Comparison of PkKr-h1 and PkE93-1\nafter N2 in males and females separately")+
+  #ggtitle("Figure 2B: Comparison of PkKr-h1A and PkE93A\after N2 in males and females separately")+
  theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
 
 
@@ -228,10 +239,10 @@ Fig2Bmale
 ![](RscriptE93_files/figure-docx/unnamed-chunk-8-1.png)<!-- -->
 
 
-#PkKr-h1 and PkE93-2 (Figure S2)
+#PkKr-h1A and PkE93B (Figure S2)
 
 ```r
-#Kr-h1 and E93-2 (Figure S2)
+#PkKr-h1 and PkE93B (Figure S2)
 desub2<-subset(degather, Gene=="Kr.h1"|Gene=="E93.2") #subset two genes
 desub2<-subset(desub2, Day.after.oviposition >= 25) #just after N2
 #with both male and female data
@@ -243,7 +254,7 @@ FigS2<-ggplot(desub2,aes(x=Day.after.oviposition, y=(SDM/rpL32), fill=Gene)) +
   scale_linetype_manual(values=c("twodash", "dotted"))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
 ylab("Relative expression (/rpL32)") +xlab("days after oviposition") +
-    ggtitle("Figure S2: Comparison of PkKr-h1 and PkE93-2\nafter N2 in males and females separately")+
+    ggtitle("Figure S2: Comparison of PkKr-h1 and PkE93B\after N2 in males and females separately")+
   theme_classic(15) + 
   theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
 FigS2
@@ -251,7 +262,7 @@ FigS2
 
 ![](RscriptE93_files/figure-docx/unnamed-chunk-9-1.png)<!-- -->
 
-#PkKr-h1 and PkE93-3 (Figure S3)
+#PkKr-h1A and PkE93-3 (Figure S3)
 
 ```r
 #Kr-h1 and E93-3 (Figure S3)
@@ -266,9 +277,9 @@ FigS3<-ggplot(desub3,aes(x=Day.after.oviposition, y=(SDM/rpL32), fill=Gene)) +
   scale_shape_manual(values=c(3, 17))+
   scale_linetype_manual(values=c("twodash", "dotted"))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour = "black"))+
-ylab("Relative expression (/rpL32)") +xlab("days after oviposition") +
+ylab("Relative expression (/PkrpL32)") +xlab("days after oviposition") +
   theme_classic(15) +
-     ggtitle("Figure S3: Comparison of PkKr-h1 and PkE93-3\nafter N2 in males and females separately")+
+     ggtitle("Figure S3: Comparison of PkKr-h1A and PkE93C\after N2 in males and females separately")+
   theme(axis.title.x = element_text(colour = "#242424",size=6), plot.title = element_text(size=8),axis.title.y = element_text(colour = "#242424",size=6))
 FigS3
 ```
@@ -285,7 +296,7 @@ JHM treatments were performed on both male and female and we assessed their effe
 ```r
 #loading file JHM treatment
 #females
-setwd("/Users/isabelle/Dropbox/_Github_reps/E93mealybug/")
+
 dtf<-read.csv(file="E93-Pyr-N3D0.csv",header = TRUE)
 names(dtf)
 ```
@@ -468,47 +479,103 @@ dtm$DayL
 ## Levels: A B C D E F
 ```
 
+Plot rpl32 per treatments
 
+```r
+#female data
+head(dtf)
+```
+
+```
+##   cDNA. Compound Treatment TreatmentStage    Sex DAT DayL N   rpL32  Gene
+## 1   203 Methanol   Control           N3D0 female   1    A 1 0.00281 Kr.h1
+## 2   204 Methanol   Control           N3D0 female   1    A 1 0.00405 Kr.h1
+## 3   205 Methanol   Control           N3D0 female   1    A 1 0.01160 Kr.h1
+## 4   206 Methanol   Control           N3D0 female   1    A 1 0.00519 Kr.h1
+## 5   281 Methanol   Control           N3D0 female   2    B 1 0.01247 Kr.h1
+## 6   282 Methanol   Control           N3D0 female   2    B 1 0.00844 Kr.h1
+##         SDM
+## 1 4.220e-05
+## 2 6.700e-05
+## 3 9.580e-05
+## 4 7.690e-05
+## 5 4.730e-05
+## 6 3.376e-05
+```
+
+```r
+rpl32f<-ggplot(dtf)+
+geom_boxplot(aes(y=dtf$rpL32, x=dtf$Treatment))
+rpl32f
+```
+
+![](RscriptE93_files/figure-docx/unnamed-chunk-13-1.png)<!-- -->
+
+```r
+#male data
+head(dtm)
+```
+
+```
+##   Sample.ID treatment Day DayL  Gene SDM.Gene SDM.rpL32
+## 1       299   Control   1    A Kr-h1 3.91e-05   0.00116
+## 2       300   Control   2    B Kr-h1 1.05e-05   0.00148
+## 3       301   Control   3    C Kr-h1 2.82e-06   0.00221
+## 4       302   Control   4    D Kr-h1 3.03e-06   0.00206
+## 5       303   Control   4    D Kr-h1 7.78e-06   0.00238
+## 6       304     Mimic   4    D Kr-h1 1.50e-04   0.00197
+```
+
+```r
+rpl32m<-ggplot(dtm)+
+geom_boxplot(aes(y=dtm$SDM.rpL32, x=dtm$treatment))
+rpl32m
+```
+
+![](RscriptE93_files/figure-docx/unnamed-chunk-13-2.png)<!-- -->
+The treatment did not affect rpl32 expression
 
 Graphs of the effect of JHM treatments on Kr-h1 and E93 gene expression and statistical tests were obtained using the log10-transformed data (see statistical analysis file for more details [add a link to the file after github upload]).
 
 
-
 ```r
-#Fig 3A: male normalized data by rpL32 transformed by log 10
-dtmlog10box <- ggplot(dtm,aes(x=DayL,y=log10(SDM.Gene/SDM.rpL32))) + geom_boxplot(width=0.5, size=0.2, outlier.size = 0.1, aes(fill=treatment)) + 
+#Fig 3A: male normalized data by PkrpL32 transformed by log 10
+boxplot3A<-ggplot(dtm,aes(x=DayL,y=log10(SDM.Gene/SDM.rpL32))) + 
+  geom_boxplot(aes(fill=treatment),width=0.5, size=0.2, outlier.shape=NA) + 
+  geom_jitter(aes(color=treatment),position=position_jitterdodge(dodge.width=0.6),alpha=0.5,size=0.6) +
   facet_wrap(~Gene,scales="free",nrow=2) + 
   theme_classic(base_size = 12) +
-  ggtitle("Figure 3A: Effect of JHM treatment on Kr-h1\nand E93 expression in males transformed by log 10")+
+  ggtitle("Figure 3A: Effect of JHM treatment on PkKr-h1A\and PkE93 expression in males transformed by log 10")+
   scale_fill_manual(name="", # Legend label, use darker colors
                   breaks=c("Control", "Mimic"),
                   labels=c("CT","5 mM"),
                   values=c("white", "grey")) +
-
-  theme(strip.background=element_rect(fill="black"))+ 
-  theme(strip.text=element_text(color="white", face="bold"))
-
-dtmlog10box
+  theme(strip.background=element_rect(fill="black")) +
+  theme(strip.text=element_text(color="white",face="bold"))
+  
+  boxplot3A
 ```
 
-![](RscriptE93_files/figure-docx/unnamed-chunk-13-1.png)<!-- -->
+![](RscriptE93_files/figure-docx/unnamed-chunk-14-1.png)<!-- -->
 
 
 
 ```r
 #Fig 3B: females absolute values normalized by rpL32 and transformed by log10
-dtflogbox <- ggplot(dtf,aes(x=DayL,y=log10(SDM/rpL32))) + geom_boxplot(width=0.5, size=0.2, outlier.size = 0.1, aes(fill=Treatment)) + 
+dtflogbox <- ggplot(dtf,aes(x=DayL,y=log10(SDM/rpL32))) + 
+  geom_boxplot(width=0.5, size=0.2, outlier.size = 0.1, aes(fill=Treatment)) + 
+  geom_jitter(aes(color=Treatment),position=position_jitterdodge(dodge.width=0.6),alpha=0.5,size=0.6) +
   facet_wrap(~Gene, scales="free",nrow=2) + 
   theme_classic(base_size = 12) +
   scale_fill_manual(name="", # Legend label, use darker colors
                   breaks=c("Control", "Mimic"),
                   labels=c("CT","20 mM"),
                   values=c("white", "grey")) +
-  ggtitle("Figure 3B: Effect of JHM treatment on Kr-h1 and\nE93 expression in females transformed log10")+
+  ggtitle("Figure 3B: Effect of JHM treatment on PkKr-h1A and\ PkE93 expression in females transformed log10")+
   theme(strip.background=element_rect(fill="black"))+ 
   theme(strip.text=element_text(color="white", face="bold"))
 
 dtflogbox
 ```
 
-![](RscriptE93_files/figure-docx/unnamed-chunk-14-1.png)<!-- -->
+![](RscriptE93_files/figure-docx/unnamed-chunk-15-1.png)<!-- -->
