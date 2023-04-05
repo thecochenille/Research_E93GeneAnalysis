@@ -1,9 +1,8 @@
-# R analyses for Vea et al. A case of insect female neoteny: E93 expression and links to the juvenile hormone in mealybugs 
+# Data analysis performed with R for the research paper: E93 expression and links to the juvenile hormone in hemipteran mealybugs with insights on female neoteny
 
 
-##Summary
-This folder includes all data files for the R analyses performed in the manuscript: Vea et al. A case of insect female neoteny: E93 expression and links to the juvenile hormone in mealybugs (submitted to Journal of Insect Biochemistry and Molecular Biology).
-A preprint of the submitted version is available at biorxiv (link), date of submission of current version (version 1.0: DATE).
+## Summary
+This folder includes all data files for the R analyses performed in the research paper: [Vea et al. E93 expression and links to the juvenile hormone in hemipteran mealybugs with insights on female neoteny (Journal of Insect Biochemistry and Molecular Biology)](https://www.sciencedirect.com/science/article/abs/pii/S0965174818301152#preview-section-abstract).
  
 
 ## List of files
